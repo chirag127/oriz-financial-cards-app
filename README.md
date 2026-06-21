@@ -1,42 +1,39 @@
-# oriz-cards
+# Oriz Tabs — Cards
 
-> India card intelligence — 750 credit, debit, and prepaid card profiles. Lives at [cards.oriz.in](https://cards.oriz.in).
+> India card intelligence — credit, debit, and prepaid card profiles for every major Indian issuer, with a static catalog and comparison UI.
 
-Static catalog and comparison UI for cards issued in India: Amex, Axis, AU SFB, Bandhan, BoB, BoM, Canara, CUB, DCB, Dhanlaxmi, ESAF, Federal, HDFC, HSBC, ICICI, IDBI, IDFC, Indian Bank, IndusInd, IOB, J&K Bank, Karnataka Bank, Kotak, KVB, PNB, PSB, RBL, Saraswat, SBI, SIB, StanChart, TMB, UCO, Union, Yes Bank.
+**Live at**: <https://cards.oriz.in> · **Status**: production
 
-Card data lives in `data/cards/{credit,debit,prepaid}/<bank>/*.json` — open data, MIT-licensed, contributions welcome.
+## What this is
 
-Part of the [oriz](https://github.com/chirag127/oriz) family of static sites. Shared sign-in across `*.oriz.in` via Firebase Authentication. Shared design system via [`@chirag127/oriz-ui`](https://github.com/chirag127/oriz-ui).
+A free, searchable directory of cards issued in India — Amex, Axis, AU SFB, Bandhan, BoB, BoM, Canara, CUB, DCB, Dhanlaxmi, ESAF, Federal, HDFC, HSBC, ICICI, IDBI, IDFC, Indian Bank, IndusInd, IOB, J&K Bank, Karnataka Bank, Kotak, KVB, PNB, PSB, RBL, Saraswat, SBI, SIB, StanChart, TMB, UCO, Union, Yes Bank. Card data lives as JSON under `data/cards/{credit,debit,prepaid}/<bank>/`.
 
-## Develop
+## Per-feature inventory
+
+| Feature | Status |
+| --- | --- |
+| Card directory + detail pages (`credit/[issuer]/[slug]`) | ✅ live |
+| `cards.json` data endpoint | ✅ live |
+| Account / sign-in (shared) | ✅ live |
+| Legal pages (privacy, terms, cookies, disclaimer, grievance) | ✅ live |
+| Debit + prepaid detail routes | 🚧 WIP |
+| Side-by-side card comparison | 📜 planned |
+
+## App-specific env vars
+
+None beyond the family-wide set at `templates/.env.example`.
+
+## Local dev
 
 ```bash
-pnpm install
-npx envpact-cli@0.2.0    # pulls .env from the shared envpact source
-pnpm dev
+# from the workspace root (c:/D/oriz)
+pnpm -F @chirag127/oriz-cards dev
 ```
 
-The dev server boots at http://localhost:4321.
+## Knowledge
 
-## Build + deploy
-
-```bash
-pnpm build               # Astro static build → dist/
-pnpm deploy              # wrangler deploy → Cloudflare Pages
-```
-
-The Cloudflare project is `oriz-cards`; the custom domain `cards.oriz.in` is bound through the dashboard. See `wrangler.toml`.
-
-## Stack
-
-- [Astro 6](https://astro.build) (static output, `format: 'directory'`)
-- [React 19](https://react.dev) for the small interactive islands (search, theme switch, account)
-- [Tailwind v4](https://tailwindcss.com) via `@tailwindcss/vite`
-- [Firebase Auth + Firestore](https://firebase.google.com) for the shared `oriz-app` project
-- [`@chirag127/oriz-ui`](https://github.com/chirag127/oriz-ui) for shared components and tokens
-- [Biome](https://biomejs.dev) for lint + format
-- Hosted on [Cloudflare Pages](https://pages.cloudflare.com)
+See [`./knowledge/`](./knowledge/) for app-specific decisions, runbooks, and services. Family rules / decisions / architecture live at the master repo's [`knowledge/`](../../../../knowledge/).
 
 ## License
 
-Code: MIT. Card data: CC BY 4.0. See `LICENSE` (TBD).
+Source-available, all rights reserved. See master [`LICENSE`](../../../../LICENSE) — same terms across the family.
